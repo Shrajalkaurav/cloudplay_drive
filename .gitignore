@@ -44,3 +44,5 @@
     
     # Office Temp Files
     ~$*
+node_modules
+.next
