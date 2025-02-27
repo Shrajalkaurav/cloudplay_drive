@@ -28,7 +28,6 @@ const Header = ({ children }: { children: React.ReactNode }) => {
     <header className="header">
       <Search />
       <div className="header-wrapper">
-        FileUploader
         <FileUploader />
         <form action="">
           <Button type="submit" className="sign-out-button" onClick={logout}>
