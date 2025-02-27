@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
+
     const decryptedData = CryptoJS.AES.decrypt(req.body.data, "Nishant").toString(CryptoJS.enc.Utf8);
 
     if (!decryptedData) {
@@ -22,6 +23,7 @@ export default async function handler(req, res) {
     }
 
     const { email, password } = JSON.parse(decryptedData);
+
 
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
@@ -32,8 +34,9 @@ export default async function handler(req, res) {
     });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid email" });
+      return res.status(401).json({ message: "User doesn't exists" });
     }
+    console.log(user)
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {

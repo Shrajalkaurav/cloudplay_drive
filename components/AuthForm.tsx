@@ -30,15 +30,14 @@ const authFormSchema = (formType: FormType) => {
         : z.string().optional(),
     password:
       formType === "sign-in"
-        ? z
-            .string()
-            // .min(8, { message: "Password should have minimum length of 8" })
-            // .max(15, "Password is too long")
-            // .regex(/^(?=.*[A-Z]).{8,}$/, {
-            //   message:
-            //     "Should Contain at least one uppercase letter and have a minimum length of 8 characters.",
-            // })
-        : z.string().optional(),
+        ? z.string()
+        : // .min(8, { message: "Password should have minimum length of 8" })
+          // .max(15, "Password is too long")
+          // .regex(/^(?=.*[A-Z]).{8,}$/, {
+          //   message:
+          //     "Should Contain at least one uppercase letter and have a minimum length of 8 characters.",
+          // })
+          z.string().optional(),
   });
 };
 
