@@ -8,14 +8,15 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkUser = async () => {
-      const res = await fetch("/api/v1/auth/auth" , { credentials: "include" });
+      const res = await fetch("/api/v1/auth/auth", { credentials: "include" });
       if (res.ok) {
         const userData = await res.json();
-        setUser(userData);
+        setUser(userData.user);
       }
     };
     checkUser();
   }, []);
+  
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
