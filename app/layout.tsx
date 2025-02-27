@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Cloudplay-Drive",
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html>
       <body className={`${poppins.variable} font-poppins antialiased`}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

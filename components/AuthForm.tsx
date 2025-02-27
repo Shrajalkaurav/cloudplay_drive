@@ -8,6 +8,8 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CryptoJS from "crypto-js";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -30,12 +32,12 @@ const authFormSchema = (formType: FormType) => {
       formType === "sign-in"
         ? z
             .string()
-            .min(8, { message: "Password should have minimum length of 8" })
-            .max(15, "Password is too long")
-            .regex(/^(?=.*[A-Z]).{8,}$/, {
-              message:
-                "Should Contain at least one uppercase letter and have a minimum length of 8 characters.",
-            })
+            // .min(8, { message: "Password should have minimum length of 8" })
+            // .max(15, "Password is too long")
+            // .regex(/^(?=.*[A-Z]).{8,}$/, {
+            //   message:
+            //     "Should Contain at least one uppercase letter and have a minimum length of 8 characters.",
+            // })
         : z.string().optional(),
   });
 };
@@ -43,7 +45,7 @@ const authFormSchema = (formType: FormType) => {
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const router = useRouter();
   const formSchema = authFormSchema(type);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,16 +62,21 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setErrorMessage("");
 
     try {
+      const encryptedPayload = CryptoJS.AES.encrypt(
+        JSON.stringify({ email: values.email, password: values.password }),
+        "Nishant"
+      ).toString();
+
       const response = await fetch("/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: { values } }),
+        body: JSON.stringify({ data: encryptedPayload }),
       });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Something went wrong");
 
-      console.log("Success:", data);
+      router.replace("/dashboard");
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {

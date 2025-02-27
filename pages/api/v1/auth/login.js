@@ -23,8 +23,6 @@ export default async function handler(req, res) {
 
     const { email, password } = JSON.parse(decryptedData);
 
-    
-
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
     }
