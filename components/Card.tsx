@@ -4,10 +4,6 @@ import Thumbnail from "./Thumbnail";
 import { convertFileSize } from "@/lib/utils";
 import FormattedDateTime from "./FormattedDateTime";
 
-interface OwnerProps {
-  fullName: string;
-}
-
 interface FileProps {
   id: number;
   title: string;
@@ -16,7 +12,7 @@ interface FileProps {
   extension: string;
   size: number;
   createdAt: string;
-  owner: OwnerProps;
+  owner: string;
 }
 const Card = ({ file }: { file: FileProps }) => {
   return (
@@ -40,9 +36,7 @@ const Card = ({ file }: { file: FileProps }) => {
           date={file.createdAt}
           className="body-2 text-light-100"
         />
-        <p className="caption line-clamp-1 text-light-100">
-          By: {file.owner.fullName}
-        </p>
+        <p className="caption line-clamp-1 text-light-100">By: {file.owner}</p>
       </div>
     </Link>
   );
