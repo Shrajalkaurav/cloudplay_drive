@@ -55,9 +55,28 @@ const AuthForm = ({ type }: { type: FormType }) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: { values } }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Something went wrong");
+
+      console.log("Success:", data);
+    } catch (error: any) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <>
       <Form {...form}>
@@ -171,8 +190,6 @@ const AuthForm = ({ type }: { type: FormType }) => {
           </div>
         </form>
       </Form>
-
-      {/* OTP Verification  */}
     </>
   );
 };
