@@ -75,7 +75,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Something went wrong");
 
-      router.replace("/dashboard");
+      router.replace("/");
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {

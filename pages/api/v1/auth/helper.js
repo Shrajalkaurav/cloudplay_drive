@@ -62,7 +62,7 @@ export const loginUser = async (email, password, setError, router) => {
     const data = await response.json();
 
     if (response.ok) {
-      router.replace("/dashboard");
+      router.replace("/");
     } else {
       setError(data.message);
     }
