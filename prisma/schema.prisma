@@ -2,7 +2,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db  {
+datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
@@ -11,4 +11,15 @@ model Admin {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
+}
+
+model File {
+  id        Int      @id @default(autoincrement())
+  title     String
+  url       String   @unique
+  type      String
+  extension String
+  size      Int
+  createdAt DateTime @default(now())
+  ownerId   String
 }

@@ -1,4 +1,4 @@
-import { data } from "@/app/data/files";
+import { data } from "@/data/files";
 import Card from "@/components/Card";
 import Sort from "@/components/Sort";
 import React from "react";
