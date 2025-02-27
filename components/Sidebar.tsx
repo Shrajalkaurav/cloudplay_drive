@@ -1,6 +1,6 @@
 "use client";
 
-import { avatarPlaceholderUrl, navItems } from "@/constants";
+import { navItems } from "@/constants";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,11 +14,11 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
       <aside className="sidebar">
         <Link href="/">
           <Image
-            src="/assets/icons/logo-2-cropped.png"
+            src="/assets/icons/icon-fill.png"
             alt="logo"
             width={160}
             height={50}
-            className="hidden h-auto lg:block"
+            className="hidden h-auto ml-12 lg:block"
           />
         </Link>
         <nav className="sidebar-nav">
