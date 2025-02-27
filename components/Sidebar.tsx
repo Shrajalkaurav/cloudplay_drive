@@ -16,8 +16,8 @@ const Sidebar = ({ children }: { children: React.ReactNode }) => {
           <Image
             src="/assets/icons/icon-fill.png"
             alt="logo"
-            width={160}
-            height={50}
+            width={120}
+            height={30}
             className="hidden h-auto ml-12 lg:block"
           />
         </Link>
